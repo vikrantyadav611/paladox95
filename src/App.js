@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react';
 import './App.css';
+import axios from 'axios'
+import {Table,TableContainer,TableHead,TableRow,TableCell, TableBody} from '@material-ui/core'
+
 
 function App() {
+  const [name,setName]=useState([])
+
+  useEffect(async()=>{
+    await axios.get('champions.json')
+    .then(function(result){
+      // console.log(result)
+      setName(result.data)
+    })
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align='center'>Name </TableCell>
+              <TableCell align='center'>Speed </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              name.map((item,index)=>(
+                <TableRow>
+                  <TableCell align='center'>{item.Name}</TableCell>
+                  <TableCell align='center'>{item.Speed}</TableCell>
+                </TableRow>
+              ))
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
   );
 }
 
