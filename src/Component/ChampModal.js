@@ -9,7 +9,6 @@ export default function MyTabs(props) {
     // const [newdata,setNewdata]=useState([])
     const { data, showmymodal } = props
     // newdata.push(data[iconindex])
-    console.log(data)
     const changetab = (value) => {
         setMyvalue(value)
     }
@@ -51,7 +50,7 @@ export default function MyTabs(props) {
                                                 <img
                                                     alt="placeholder"
                                                     style={{ width: 50 }}
-                                                    src={'pala_1.png'}
+                                                    src={'/assets/pala_1.png'}
                                                 />
                                             }
                                         />
@@ -84,7 +83,7 @@ export default function MyTabs(props) {
                                                     <img
                                                         alt="placeholder"
                                                         style={{ width: 30 }}
-                                                        src={'pala_1.png'} />
+                                                        src={'/assets/pala_1.png'} />
                                                 }
                                             />
                                         </Col>
@@ -100,7 +99,7 @@ export default function MyTabs(props) {
                                                     <img
                                                         alt="placeholder"
                                                         style={{ width: 30 }}
-                                                        src={'pala_1.png'} />
+                                                        src={'/assets/pala_1.png'} />
                                                 }
                                             />
                                         </Col>
@@ -116,7 +115,7 @@ export default function MyTabs(props) {
                                                     <img
                                                         alt="placeholder"
                                                         style={{ width: 30 }}
-                                                        src={'pala_1.png'} />
+                                                        src={'/assets/pala_1.png'} />
                                                 }
                                             />
 
@@ -132,7 +131,7 @@ export default function MyTabs(props) {
                                                 <img
                                                     alt="placeholder"
                                                     style={{ width: 30 }}
-                                                    src={'pala_1.png'} />
+                                                    src={'/assets/pala_1.png'} />
                                             }
                                         />
                                         </Col>
@@ -146,7 +145,7 @@ export default function MyTabs(props) {
                                             <img
                                                 alt="placeholder"
                                                 style={{ width: 30 }}
-                                                src={'pala_1.png'} />
+                                                src={'/assets/pala_1.png'} />
                                         }
                                     />
                                     </Col>

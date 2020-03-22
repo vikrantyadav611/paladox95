@@ -26,7 +26,7 @@ export default function MyTabs(props) {
                  <strong>Built with React, React95.</strong>
                     <br/>
                 
-                <strong>Made with ❤️ by <a href='https://twitter.com/Breadistaken' target='_blank'>@dreddd</a></strong>
+                <strong>with ❤️ by <a href='https://twitter.com/Breadistaken' target='_blank'>@dreddd</a></strong>
        
             </WindowContent>
         </Window>

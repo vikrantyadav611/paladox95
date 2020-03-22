@@ -21,7 +21,7 @@ export default function ChampList(props) {
                 <img
                 alt="placeholder"
                 style={{ width: 40 }}
-                src={'pala_1.png'}
+                src={'/assets/pala_1.png'}
               />
               }
               >

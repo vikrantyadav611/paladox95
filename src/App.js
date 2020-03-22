@@ -21,7 +21,6 @@ function App() {
   const [about_modal, setAbout_modal] = useState(false)
   const [hrs, sethrs] = useState()
   const [min, setmin] = useState()
-  const [champ_search,setChamp_search]=useState('')
 
   const handlebtn = (index) => {
     var sound = new Howl({
@@ -98,7 +97,7 @@ function App() {
                   <Button
                     active={btn}
                     onClick={handleClose}
-                  ><img src='win_95_icon.png' />
+                  ><img src='/assets/win_95_icon.png' />
                     <strong> Paladox95</strong>
                   </Button>
 
@@ -111,7 +110,7 @@ function App() {
                     onClick={() => setShowmodal(!showmodal)}
                     className='champ_modal_btn'
                     style={{ marginLeft: 5 }}
-                  ><img style={{ width: 22, height: 22 }} src='win95_task.png' /> <strong> Champion</strong></Button>
+                  ><img style={{ width: 22, height: 22 }} src='/assets/win95_task.png' /> <strong> Champion</strong></Button>
                 )
               }
             </div>
@@ -123,7 +122,7 @@ function App() {
               value={champ_search}
               onChange={(e)=>setChamp_search(e.target.value)}
               /> */}
-            <Button className='timebtn'><img style={{ width: 20, height: 20 }} src='speaker.png'></img>{hrs}:{min}{hrs > 12 ? 'PM' : 'AM'}</Button>
+            <Button className='timebtn'><img style={{ width: 20, height: 20 }} src='/assets/speaker.png'></img>{hrs}:{min}{hrs > 12 ? 'PM' : 'AM'}</Button>
             </div>
           </Toolbar>
 
