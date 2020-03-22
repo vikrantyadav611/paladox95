@@ -2,15 +2,30 @@
   text-align: center;
 }
 
-
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: overlay;
+}
+.timebtn{
+  box-shadow:none;
+}
 .modal{
 margin-top: 10000px;
 }
 
+.champ_modal_btn{
+  margin-top: 5px;
+}
+
 .styles_modal__gNwvD{
  background :transparent;
+ box-shadow: none;
 }
 
 .styles_overlay__CLSq-{
   background:transparent;
+  box-shadow: none;
 }

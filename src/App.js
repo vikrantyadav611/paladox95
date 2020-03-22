@@ -1,34 +1,36 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios'
 import { ThemeProvider } from 'styled-components';
-import styled from 'styled-components'
 import ChampModal from './Component/ChampModal'
 import AboutModal from './Component/AboutModal'
-import { Button, ListItem, Divider, List, TextField, Toolbar, themes, AppBar } from 'react95'
+import { Button, ListItem, Divider, List,TextField, Toolbar, themes, AppBar } from 'react95'
 import ReactModal from 'react-responsive-modal'
-import ReactImage from 'react-image' 
+import ChampList from './Component/ChampList'
+import ClickAwayListener from 'react-click-away-listener'
+import { Howl } from 'howler'
+import SearchResults from 'react-filter-search'
 
-// const CustomImg = styled.img`
-// width:150px;
-// height:150px;
-// margin:20px;
-// padding:40px;
-// border-radius:10px;
-// cursor:pointer;
-// `
 
 function App() {
   const [name, setName] = useState([])
-  const [show, setShow] = useState(false)
   const [btn, setBtn] = useState(false)
   const [i, setI] = useState()
   const [showmodal, setShowmodal] = useState(false)
+  // const [loading,setLoading]=useState(true)
   const [about_modal, setAbout_modal] = useState(false)
+  const [hrs, sethrs] = useState()
+  const [min, setmin] = useState()
+  const [champ_search,setChamp_search]=useState('')
 
   const handlebtn = (index) => {
+    var sound = new Howl({
+      src: [name[index].Audio]
+    })
+    sound.play()
     setShowmodal(true)
     setI(index)
+
   }
   const showAboutModel = () => {
     setAbout_modal(true)
@@ -36,15 +38,37 @@ function App() {
   const handleClose = () => {
     setBtn(!btn)
   }
-  useEffect(async () => {
-    await axios.get('champions.json')
+
+  const handleAway = () => {
+    setBtn(false)
+  }
+
+  useEffect(() => {
+    const local_time = new Date(Date())
+    const hrs = local_time.getHours()
+    const min = local_time.getMinutes()
+     async function fetchdata(){
+      await axios.get('champions.json')
       .then(function (result) {
         setName(result.data)
       }).catch(function (err) {
         console.log(err)
       })
+     }
+    
+      fetchdata()
+      // setLoading(false)
+    sethrs(hrs)
+    setmin(min)
   }, [])
 
+  // if(loading){
+  //   return(
+  //     <div style={{display:'flex', alignItems:'center',marginTop:300, justifyContent:'center'}}>
+  //       <Hourglass/>
+  //     </div>
+  //   )
+  // }
   const handleModalClose = () => {
     setShowmodal(false)
   }
@@ -54,66 +78,81 @@ function App() {
   }
   return (
     <div style={{ background: '#5aa', marginTop: '45px' }} >
-
       <ThemeProvider theme={themes.default}>
         {/* App Bar */}
         <AppBar>
-          <Toolbar>
-            <div style={{ position: 'relative', display: 'inline-block' }}>
+          <Toolbar style={{ justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ position: 'relative', display: 'inline-block' }}>
+                <ClickAwayListener onClickAway={handleAway}>
+
+                  {
+                    btn && (
+                      <List horizontalAlign="left" verticalAlign="bottom" style={{ marginBottom: 5 }} open={btn} onClick={handleClose}>
+                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611', '_blank')}>📚 Github Repo</ListItem>
+                        <Divider />
+                        <ListItem onClick={showAboutModel}>📁 About</ListItem>
+                      </List>
+                    )
+                  }
+                  <Button
+                    active={btn}
+                    onClick={handleClose}
+                  ><img src='win_95_icon.png' />
+                    <strong> Paladox95</strong>
+                  </Button>
+
+                </ClickAwayListener>
+              </div>
               {
-                btn && (
-                  <List horizontalAlign="left" verticalAlign="bottom"  style={{ marginBottom:5 }} open={btn} onClick={handleClose}>
-                    <ListItem onClick={() => window.open('https://github.com/vikrantyadav611', '_blank')}>📚 Github Repo</ListItem>
-                    <Divider />
-                    <ListItem onClick={showAboutModel}>📁 About</ListItem>
-                  </List>
+                showmodal && (
+                  <Button
+                    active={showmodal}
+                    onClick={() => setShowmodal(!showmodal)}
+                    className='champ_modal_btn'
+                    style={{ marginLeft: 5 }}
+                  ><img style={{ width: 22, height: 22 }} src='win95_task.png' /> <strong> Champion</strong></Button>
                 )
               }
-              <Button
-                active={btn}
-                onClick={handleClose}
-              ><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAACXBIWXMAAAsSAAALEgHS3X78AAAQR0lEQVRYCQE8EMPvAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAP8AAAAAAP8AAAIAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA//8AAAAB/wAAAgAAAAAAAAAAAQD/AP8AAAAAAAAAAAAAAP8AAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAD/AAAAAAEAAAAAAAAAAP8AAP8AAAAAAQAAAP8AAAAB/wAAAAAAAAEAAAAAAAAAAAAA//8AAAAAAAABAAAA/wD//wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAA/wAAAAAA/wIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAQD/AAAAAAD/AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAP8AAAABAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAP8AAAD/AAAA/wAAAAAAAAEAAAAAAAAAAAAAAAAAAAD/AAAAAQAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA/wAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAABAP//AAAAAAAAAAAAAAEBAAABAAAAAAAAAAAAAAAAAAAA/wAAAAEAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAP8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAP8AAAABAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQL/AAD/AAAAAQAAAP8AAAAAAAAA/wAAAP8AAAAAAAAAAP8AAAD/AAAA/wAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAgEAAAH/AAD/AAAAAQAAAAAAAAABAAAAAf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA/wEAAAH/AAD/AAAAAP8AAP//AAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA/wAAAAEAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAgAA//8AAAABAAAA/wAAAAAAAAD/AAAA/wAAAAAAAAAAAAD/AAAA/wAAAP8AAAAAAP//AAD//wAAAAAAAAAAAAACAAABAQAA//8AAAABAAAAAAAAAAEAAAABAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAD/AAABAQAA//8AAAAAAAD//wAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAD/AAAAAQAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAD/AAAAAQAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAD/AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAA/wAA/wEAAAEAAAAAAAAAAAAAAP8AAAAAAAAAAQAAAAAAAAD/AAAAAQAAAP8AAAAAAAAAAAAAAAEAAAD/AAAAAAAAAACAAAAAAAAAAH8AAAAAAAAAAQAAAAAAAAAA/wAAAAAAAACBAAAAAAAAAIAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAD/AAD/AQAAAQAAAAAAAAAAAAAAAAAAAP8AAAABAAAAAAAAAP8AAAABAAAAAAAAAAAAAAD/AAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAQIAAAAAAAAA/wAAAAABAAABAAAAAP8AAP//AAD/AAAAAAAAAAH/AAD/AAAAAP8AAAD/AAD//wAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAD/AAAAAQEAAAEAAAAAAAAAAP8AAP8BAAABAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAH8AAAAAAAAAAAAAAAAAAAQAAAAAAAD//wAAAQEAAAABAAAAAAAAAP8AAAAAAAAAAQEAAAEAAAD/AAAAAQEAAAAAAAD/AAAAAAAAAAEAAAAAAAAAAAEAAAAAAIAAAAAAAAAAfwAAAAAAAAABAAAAAAD//wAAAAAAAIGBAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAP//AAABAQAAAAAAAAAAAAAAAAAAAP8AAAABAAAAAAAAAP8AAAABAAAAAAAAAAAAAAD/AAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAQIAAAAAAAAA/wAAAAAAAAEBAAAAAAAA//8AAP//AAAAAAAAAAEAAP//AAAAAAAA/wAAAP//AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAD/AAAAAQAAAQEAAAAAAAAAAAAA//8AAAEBAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAAgAAAAAAAAAAAAAAAAAABAQAAAAAAAICAAAAAAAAAf38AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAQAAAAAAAAD/AAAAAQAAAP8AAAAAAAAAAAAAAAEAAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO4NtYBuc2+1AAAAAElFTkSuQmCC' />
-                <strong> Paladox95</strong></Button>
-                
             </div>
-            {
-                  showmodal && (
-                    <Button
-                    active={showmodal}
-                    style={{marginLeft:5,marginBottom:4}}
-                    ><img style={{width:22,height:22}} src='win95_task.png'/> <strong> Champion</strong></Button>
-                  )
-                }
+            <div>
+            {/* <TextField
+              variant='default'
+              style={{marginTop:-12,marginRight:5}}
+              placeholder='Search...'
+              value={champ_search}
+              onChange={(e)=>setChamp_search(e.target.value)}
+              /> */}
+            <Button className='timebtn'><img style={{ width: 20, height: 20 }} src='speaker.png'></img>{hrs}:{min}{hrs > 12 ? 'PM' : 'AM'}</Button>
+            </div>
           </Toolbar>
+
         </AppBar>
 
         {/* Champions Grid List */}
         {
-          name.map((item, index) => (
-            <Fragment>
-              <ReactImage 
-              key={index}
-              style={{
-                width:150,
-                height:150,
-                margin:20,
-                padding:40,
-                borderRadius:10,
-                cursor:'pointer'
-              }}
-              onDoubleClick={handlebtn.bind(this, index)} 
-              src={item.ChampionIcon_URL}
-              loader={
-                <img
-                alt="placeholder"
-                style={{ width: 40 }}
-                src={'pala_1.png'}
-              />
-              }
-              >
-              </ReactImage>
-            </Fragment>
-          ))
+          // <SearchResults
+          // value={champ_search}
+          // data={name}
+          // renderResults={
+          //   results=>(
+          //     <div>
+          //       {
+                  name.map((el,index)=>(
+                      <ChampList key={el.id} index={index} item={el} handlebtn={handlebtn}></ChampList>
+                  ))
+          //       }
+          //     </div>
+          //   )
+          // }
+          // />
+
+
+          // name.map((item, index) => (
+
+          //   <ChampList index={index} item={item} handlebtn={handlebtn}></ChampList>
+
+          // ))
         }
 
         {/* Champion Modal */}
@@ -136,8 +175,8 @@ function App() {
           animationDuration={0}
           center={true}
           children={
-          <AboutModal closemodel={closeAboutModel}>
-          </AboutModal>
+            <AboutModal closemodel={closeAboutModel}>
+            </AboutModal>
           }
           open={about_modal}
           showCloseIcon={false}

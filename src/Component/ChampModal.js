@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Tabs, Table, TableHead, TableDataCell, TableRow, TableBody, TableHeadCell, Tab, TabBody, Window, WindowHeader, WindowContent, Avatar, Button, List, ListItem } from 'react95'
+import React, { useState } from 'react'
+import { Tabs, Tab, TabBody, Window, WindowHeader, WindowContent, Button, List, ListItem } from 'react95'
 import { Container, Row, Col } from 'react-bootstrap'
 import ReactImg from 'react-image'
 import '../Component/ChampModal.css'
@@ -60,8 +60,8 @@ export default function MyTabs(props) {
                                         <List fullWidth='true'>
                                             <ListItem>Name: <strong>{item.Name}</strong></ListItem>
                                             <ListItem>Role: <strong>{item.Roles}</strong></ListItem>
-                                            <ListItem>Health: <strong>{item.Health}</strong> </ListItem>
                                             <ListItem>Speed: <strong>{item.Speed}</strong> </ListItem>
+                                            <ListItem>Health: <strong>{item.Health}</strong> </ListItem>
                                         </List>
                                     </Col>
                                 </Row>

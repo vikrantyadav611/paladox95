@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Tabs, Table, TableHead, TableDataCell, TableRow, TableBody, TableHeadCell, Tab, TabBody, Window, WindowHeader, WindowContent, Avatar, Button, List, ListItem } from 'react95'
+import React from 'react'
+import { Window, WindowHeader, WindowContent, Button } from 'react95'
 import '../Component/AboutModal.css'
 
 export default function MyTabs(props) {
@@ -7,16 +7,13 @@ export default function MyTabs(props) {
     const { closemodel } = props
 
     return (
-
-
         <Window>
-
             <WindowHeader
                 style={{
                     justifyContent: 'space-between',
                     display: 'flex'
                 }}
-            >
+                >
                 <span>About</span>
                 <Button size='sm' onClick={closemodel} style={{ cursor:'default', marginTop: '3px', marginRight: '-2px' }}>
                    <span className='closebtn'> x</span>
@@ -30,9 +27,7 @@ export default function MyTabs(props) {
                     <br/>
                 
                 <strong>Made with ❤️ by <a href='https://twitter.com/Breadistaken' target='_blank'>@dreddd</a></strong>
-                    
-
-
+       
             </WindowContent>
         </Window>
 

@@ -1,3 +1,4 @@
 .closebtn{
     transform: translateY(-6px);
-}
+    overflow: hidden;
+}   
