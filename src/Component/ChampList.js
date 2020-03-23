@@ -12,7 +12,7 @@ export default function ChampList(props) {
               style={{
                 width:150,
                 height:150,
-                margin:20,
+                margin:15,
                 padding:40,
                 borderRadius:10,
                 cursor:'pointer'
