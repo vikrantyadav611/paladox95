@@ -46,7 +46,7 @@ function App() {
     const hrs = local_time.getHours()
     const min = local_time.getMinutes()
      async function fetchdata(){
-      await axios.get('champions.json')
+      await axios.get('paladins_champions.json')
       .then(function (result) {
         setName(result.data)
       }).catch(function (err) {
