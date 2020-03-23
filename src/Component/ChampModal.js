@@ -24,7 +24,7 @@ export default function MyTabs(props) {
 
         data.map(item => (
 
-            <Window style={{ height: 480, width: 600 }}>
+            <Window className='champ_container'>
 
                 <WindowHeader
                     style={{
@@ -77,6 +77,7 @@ export default function MyTabs(props) {
                         </TabBody>
                     }
                     {   
+                    // Ability 1
                          row_one && 
                          <ClickAwayListener onClickAway={()=>setRow_one(false)}>
                         <TabBody>
@@ -97,6 +98,8 @@ export default function MyTabs(props) {
                         </TabBody>
                         </ClickAwayListener>
                         ||
+
+                    // Ability 2
                         row_two && 
                         <ClickAwayListener onClickAway={()=>setRow_two(false)}>
                        <TabBody>
@@ -118,6 +121,8 @@ export default function MyTabs(props) {
                        </TabBody>
                        </ClickAwayListener>
                         ||
+
+                    //Ability 3
                         row_three && 
                         <ClickAwayListener onClickAway={()=>setRow_three(false)}>
                        <TabBody>
@@ -138,6 +143,8 @@ export default function MyTabs(props) {
                        </TabBody>
                        </ClickAwayListener>
                        ||
+
+                    // Ability 4   
                         row_four && 
                         <ClickAwayListener onClickAway={()=>setRow_four(false)}>
                        <TabBody>
@@ -158,6 +165,7 @@ export default function MyTabs(props) {
                        </TabBody>
                        </ClickAwayListener>
                         ||
+                    //Abilty 5    
                         row_fifth && 
                         <ClickAwayListener onClickAway={()=>setRow_fifth(false)}>
                        <TabBody>
@@ -182,7 +190,7 @@ export default function MyTabs(props) {
                         <TabBody>
                             <List fullWidth='true'>
                                 <ListItem>
-                                    <Row onClick={()=>setRow_one(true)}>
+                                    <Row onClick={()=>setRow_one(true)} style={{cursor:'pointer'}}>
                                         <Col>
                                             <ReactImg style={{ width: 30, height: 30 }}
                                                 src={item.ChampionAbility1_URL}
@@ -198,7 +206,7 @@ export default function MyTabs(props) {
                                     </Row>
                                 </ListItem>
                                 <ListItem>
-                                    <Row onClick={()=>setRow_two(true)}>
+                                    <Row onClick={()=>setRow_two(true)} style={{cursor:'pointer'}}>
                                         <Col>
                                             <ReactImg style={{ width: 30, height: 30 }}
                                                 src={item.ChampionAbility2_URL}
@@ -214,7 +222,7 @@ export default function MyTabs(props) {
                                     </Row>
                                 </ListItem>
                                 <ListItem>
-                                    <Row onClick={()=>setRow_three(true)}>
+                                    <Row onClick={()=>setRow_three(true)} style={{cursor:'pointer'}}>
                                         <Col>
                                             <ReactImg style={{ width: 30, height: 30 }}
                                                 src={item.ChampionAbility3_URL}
@@ -231,7 +239,7 @@ export default function MyTabs(props) {
                                     </Row>
                                 </ListItem>
                                 <ListItem>
-                                    <Row onClick={()=>setRow_four(true)}>
+                                    <Row onClick={()=>setRow_four(true)} style={{cursor:'pointer'}}>
                                         <Col><ReactImg style={{ width: 30, height: 30 }}
                                             src={item.ChampionAbility4_URL}
                                             loader={
@@ -246,7 +254,7 @@ export default function MyTabs(props) {
                                     </Row>
                                 </ListItem>
                                 <ListItem>
-                                    <Row onClick={()=>setRow_fifth(true)}>
+                                    <Row onClick={()=>setRow_fifth(true)} style={{cursor:'pointer'}}>
                                     <Col><ReactImg style={{ width: 30, height: 30 }}
                                         src={item.ChampionAbility5_URL}
                                         loader={

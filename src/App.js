@@ -7,6 +7,7 @@ import AboutModal from './Component/AboutModal'
 import { Button, ListItem, Divider, List, Toolbar, themes, AppBar } from 'react95'
 import ReactModal from 'react-responsive-modal'
 import ChampList from './Component/ChampList'
+import { Container } from 'react-bootstrap'
 import ClickAwayListener from 'react-click-away-listener'
 import { Howl } from 'howler'
 
@@ -118,7 +119,6 @@ function App() {
           </Toolbar>
 
         </AppBar>
-        <div className='grid-container'>
         {/* Champions Grid List */}
           
         <ChampList data={name} handlebtn={handlebtn}></ChampList>
@@ -149,7 +149,6 @@ function App() {
           open={about_modal}
           showCloseIcon={false}
         />
-        </div>
       </ThemeProvider>
     </div>
 

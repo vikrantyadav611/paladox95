@@ -2,3 +2,24 @@
     transform: translateY(-6px);
     overflow: hidden;
 }   
+
+@media (min-width: 768px) {
+    .champ_container {
+        width: 300px;
+        height:240px
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .champ_container {
+        width: 500px;
+        height:480px
+    }
+  }
+  @media (min-width: 1200px) {
+    .champ_container {
+      width: 600px;
+      height:480px
+    }
+  }
+  
