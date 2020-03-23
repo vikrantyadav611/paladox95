@@ -2527,24 +2527,24 @@
             "Description": "A Longbow that draws back and releases an arrow for up to 1000 damage every 1.5s. Fully effective up to 450 units. Will travel less far and deal less damage if released before it is fully charged. A new arrow is nocked 0.5s after firing and is drawn back over 1s. Your Movement Speed is reduced by 10% while your bow is drawn.",
             "Id": 14891,
             "Summary": "Longbow",
-            "URL": "https://web2.hirez.com/paladins/champion-abilities/long-bow.jpg",
             "damageType": "Direct",
+            "URL": "https://web2.hirez.com/paladins/champion-abilities/long-bow.jpg",
             "rechargeSeconds": 0
         },
         "Ability_2": {
             "Description": "Causes the next shot from your Longbow to fire an arrow that Cripples enemies, preventing them from using movement abilities for 2s. Can be toggled by reactivating the ability.",
             "Id": 14928,
-            "Summary": "Crippling Arrow",
-            "URL": "https://web2.hirez.com/paladins/champion-abilities/impaler-arrow.jpg",
+            "Summary": "Crippling Arrow",   
             "damageType": "Direct",
+            "URL": "https://web2.hirez.com/paladins/champion-abilities/impaler-arrow.jpg",
             "rechargeSeconds": 8
         },
         "Ability_3": {
             "Description": "Rapidly fire a maximum of 5 fully-charged arrows over 1.8s while moving, dealing 600 damage per arrow with a 200% increased draw speed. While using this ability your Movement Speed is decreased by 20%. Can be reactivated to cancel. Acts as a weapon shot.",
             "Id": 14988,
-            "Summary": "Rapid Shot",
-            "URL": "https://web2.hirez.com/paladins/champion-abilities/planted.jpg",
+            "Summary": "Rapid Shot",    
             "damageType": "Direct",
+            "URL": "https://web2.hirez.com/paladins/champion-abilities/planted.jpg",
             "rechargeSeconds": 18
         },
         "Ability_4": {
