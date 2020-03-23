@@ -2,7 +2,6 @@
   "name": "paladox",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://gamepedia.cursecdn.com",
   "dependencies": {
     "@material/image-list": "^5.1.0",
     "@testing-library/jest-dom": "^4.2.4",
