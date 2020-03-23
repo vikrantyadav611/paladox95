@@ -2563,9 +2563,9 @@
             "damageType": "True",
             "rechargeSeconds": 0
         },
-        "ChampionAbility1_URL": "https://web2.hirez.com/paladins/champion-abilities/longbow.jpg",
-        "ChampionAbility2_URL": "https://web2.hirez.com/paladins/champion-abilities/crippling-arrow.jpg",
-        "ChampionAbility3_URL": "https://web2.hirez.com/paladins/champion-abilities/rapid-shot.jpg",
+        "ChampionAbility1_URL": "https://web2.hirez.com/paladins/champion-abilities/long-bow.jpg",
+        "ChampionAbility2_URL": "https://web2.hirez.com/paladins/champion-abilities/impaler-arrow.jpg",
+        "ChampionAbility3_URL": "https://web2.hirez.com/paladins/champion-abilities/planted.jpg",
         "ChampionAbility4_URL": "https://web2.hirez.com/paladins/champion-abilities/withdraw.jpg",
         "ChampionAbility5_URL": "https://web2.hirez.com/paladins/champion-abilities/heat-haze.jpg",
         "ChampionCard_URL": "",
