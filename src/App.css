@@ -29,3 +29,28 @@ margin-top: 10000px;
   background:transparent;
   box-shadow: none;
 }
+
+.grid-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: overlay;
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .grid-container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .grid-container {
+    width: 1170px;
+  }
+}

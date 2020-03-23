@@ -4,12 +4,11 @@ import axios from 'axios'
 import { ThemeProvider } from 'styled-components';
 import ChampModal from './Component/ChampModal'
 import AboutModal from './Component/AboutModal'
-import { Button, ListItem, Divider, List,TextField, Toolbar, themes, AppBar } from 'react95'
+import { Button, ListItem, Divider, List, Toolbar, themes, AppBar } from 'react95'
 import ReactModal from 'react-responsive-modal'
 import ChampList from './Component/ChampList'
 import ClickAwayListener from 'react-click-away-listener'
 import { Howl } from 'howler'
-import SearchResults from 'react-filter-search'
 
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
   const [btn, setBtn] = useState(false)
   const [i, setI] = useState()
   const [showmodal, setShowmodal] = useState(false)
-  // const [loading,setLoading]=useState(true)
   const [about_modal, setAbout_modal] = useState(false)
   const [hrs, sethrs] = useState()
   const [min, setmin] = useState()
@@ -56,18 +54,11 @@ function App() {
      }
     
       fetchdata()
-      // setLoading(false)
     sethrs(hrs)
     setmin(min)
   }, [])
 
-  // if(loading){
-  //   return(
-  //     <div style={{display:'flex', alignItems:'center',marginTop:300, justifyContent:'center'}}>
-  //       <Hourglass/>
-  //     </div>
-  //   )
-  // }
+
   const handleModalClose = () => {
     setShowmodal(false)
   }
@@ -88,7 +79,7 @@ function App() {
                   {
                     btn && (
                       <List horizontalAlign="left" verticalAlign="bottom" style={{ marginBottom: 5 }} open={btn} onClick={handleClose}>
-                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611', '_blank')}>📚 Github Repo</ListItem>
+                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611/paladox', '_blank')}>📚 Github Repo</ListItem>
                         <Divider />
                         <ListItem onClick={showAboutModel}>📁 About</ListItem>
                       </List>
@@ -127,33 +118,11 @@ function App() {
           </Toolbar>
 
         </AppBar>
-
+        <div className='grid-container'>
         {/* Champions Grid List */}
-        {
-          // <SearchResults
-          // value={champ_search}
-          // data={name}
-          // renderResults={
-          //   results=>(
-          //     <div>
-          //       {
-                  name.map((el,index)=>(
-                      <ChampList key={el.id} index={index} item={el} handlebtn={handlebtn}></ChampList>
-                  ))
-          //       }
-          //     </div>
-          //   )
-          // }
-          // />
-
-
-          // name.map((item, index) => (
-
-          //   <ChampList index={index} item={item} handlebtn={handlebtn}></ChampList>
-
-          // ))
-        }
-
+          
+        <ChampList data={name} handlebtn={handlebtn}></ChampList>
+         
         {/* Champion Modal */}
         <ReactModal
           children={
@@ -180,6 +149,7 @@ function App() {
           open={about_modal}
           showCloseIcon={false}
         />
+        </div>
       </ThemeProvider>
     </div>
 

@@ -2,9 +2,11 @@ import React,{Fragment} from 'react'
 import ReactImage from 'react-image'
 
 export default function ChampList(props) {
-    const {index,item,handlebtn}=props
+    const {data,handlebtn}=props
     return (
         <Fragment>
+          {
+          data.map((item,index)=>(
             <ReactImage 
               key={item.id}
               style={{
@@ -26,6 +28,9 @@ export default function ChampList(props) {
               }
               >
               </ReactImage>
+          ))
+              }
         </Fragment>
+      
     )
 }
