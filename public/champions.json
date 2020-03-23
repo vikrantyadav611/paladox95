@@ -172,6 +172,7 @@
         "AbilityId3": 24055,
         "AbilityId4": 24188,
         "AbilityId5": 24400,
+        "Audio":"assets/ogg/Atlas_SP_Select.ogg",
         "Ability_1": {
             "Description": "A futuristic weapon that can be charged up over 1.5s, increasing your Accuracy and damage falloff range, and firing fewer shots depending on its charge. This weapon deals 750 damage, has a maximum Ammo count of 6, and is fully effective up to 40 units at base charge.",
             "Id": 24033,
