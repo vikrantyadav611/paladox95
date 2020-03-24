@@ -86,7 +86,7 @@ function App() {
                   {
                     btn && (
                       <List horizontalAlign="left" verticalAlign="bottom" style={{ marginBottom: 5 }} open={btn} onClick={handleClose}>
-                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611/paladox', '_blank')}>📚 Github Repo</ListItem>
+                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611/paladox95', '_blank')}>📚 Github Repo</ListItem>
                         <Divider />
                         <ListItem onClick={showAboutModel}>📁 About</ListItem>
                       </List>
