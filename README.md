@@ -2,7 +2,7 @@
 
 A windows 95 inspired PalaDox built with React [CRA]
 
-![paladins](https://agitated-hugle-0226bd.netlify.com/assets/paladins.png)
+![paladins](https://paladox95.netlify.com/assets/paladins.png)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
