@@ -7,7 +7,6 @@ import AboutModal from './Component/AboutModal'
 import { Button, ListItem, Divider, List, Toolbar, themes, AppBar } from 'react95'
 import ReactModal from 'react-responsive-modal'
 import ChampList from './Component/ChampList'
-import { Container } from 'react-bootstrap'
 import ClickAwayListener from 'react-click-away-listener'
 import { Howl } from 'howler'
 
@@ -18,8 +17,7 @@ function App() {
   const [i, setI] = useState()
   const [showmodal, setShowmodal] = useState(false)
   const [about_modal, setAbout_modal] = useState(false)
-  const [hrs, sethrs] = useState()
-  const [min, setmin] = useState()
+  const [time, setTime] = useState()
 
   const handlebtn = (index) => {
     var sound = new Howl({
@@ -42,9 +40,7 @@ function App() {
   }
 
   useEffect(() => {
-    const local_time = new Date(Date())
-    const hrs = local_time.getHours()
-    const min = local_time.getMinutes()
+    setInterval(current_time,1000)
      async function fetchdata(){
       await axios.get('paladins_champions.json')
       .then(function (result) {
@@ -54,12 +50,15 @@ function App() {
       })
      }
     
-      fetchdata()
-    sethrs(hrs)
-    setmin(min)
+    fetchdata()
+    // setmin(min)
   }, [])
 
-
+  const current_time=()=>{
+    const timer=Date()
+    const local_time=timer.slice(16,24)
+    setTime(local_time)
+  }
   const handleModalClose = () => {
     setShowmodal(false)
   }
@@ -67,6 +66,13 @@ function App() {
   const closeAboutModel = () => {
     setAbout_modal(false)
   }
+  const handle_time=()=>{
+    const ultSound=new Howl({
+      src:'assets/ogg/Atlas_Ult.ogg'
+    })
+    ultSound.play()
+  }
+
   return (
     <div style={{ background: '#5aa', marginTop: '45px' }} >
       <ThemeProvider theme={themes.default}>
@@ -114,7 +120,7 @@ function App() {
               value={champ_search}
               onChange={(e)=>setChamp_search(e.target.value)}
               /> */}
-            <Button className='timebtn'><img style={{ width: 20, height: 20 }} src='/assets/speaker.png'></img>{hrs}:{min}{hrs > 12 ? 'PM' : 'AM'}</Button>
+            <Button onClick={handle_time} className='timebtn'><img style={{ width: 20, height: 20 }} src='/assets/speaker.png'></img>{time}</Button>
             </div>
           </Toolbar>
 
