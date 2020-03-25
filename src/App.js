@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+
+/* Components */
+import ChampModal from './Component/JS/ChampModal'
+import AboutModal from './Component/JS/AboutModal'
+import ChampList from './Component/JS/ChampList'
+import ChampAppBar from './Component/JS/ChampAppBar'
+
+/* Packages */
+import {themes, AppBar } from 'react95'
 import axios from 'axios'
 import { ThemeProvider } from 'styled-components';
-import ChampModal from './Component/ChampModal'
-import AboutModal from './Component/AboutModal'
-import { Button, ListItem, Divider, List, Toolbar, themes, AppBar } from 'react95'
 import ReactModal from 'react-responsive-modal'
-import ChampList from './Component/ChampList'
-import ClickAwayListener from 'react-click-away-listener'
 import { Howl } from 'howler'
 
 
@@ -76,55 +80,21 @@ function App() {
   return (
     <div style={{ background: '#5aa', marginTop: '45px' }} >
       <ThemeProvider theme={themes.default}>
+
         {/* App Bar */}
         <AppBar>
-          <Toolbar style={{ justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ position: 'relative', display: 'inline-block' }}>
-                <ClickAwayListener onClickAway={handleAway}>
-
-                  {
-                    btn && (
-                      <List horizontalAlign="left" verticalAlign="bottom" style={{ marginBottom: 5 }} open={btn} onClick={handleClose}>
-                        <ListItem onClick={() => window.open('https://github.com/vikrantyadav611/paladox95', '_blank')}>📚 Github Repo</ListItem>
-                        <Divider />
-                        <ListItem onClick={showAboutModel}>📁 About</ListItem>
-                      </List>
-                    )
-                  }
-                  <Button
-                    active={btn}
-                    onClick={handleClose}
-                  ><img src='/assets/win_95_icon.png' />
-                    <strong> Paladox95</strong>
-                  </Button>
-
-                </ClickAwayListener>
-              </div>
-              {
-                showmodal && (
-                  <Button
-                    active={showmodal}
-                    onClick={() => setShowmodal(!showmodal)}
-                    className='champ_modal_btn'
-                    style={{ marginLeft: 5 }}
-                  ><img style={{ width: 22, height: 22 }} src='/assets/win95_task.png' /> <strong> Champion</strong></Button>
-                )
-              }
-            </div>
-            <div>
-            {/* <TextField
-              variant='default'
-              style={{marginTop:-12,marginRight:5}}
-              placeholder='Search...'
-              value={champ_search}
-              onChange={(e)=>setChamp_search(e.target.value)}
-              /> */}
-            <Button onClick={handle_time} className='timebtn'><img style={{ width: 20, height: 20 }} src='/assets/speaker.png'></img>{time}</Button>
-            </div>
-          </Toolbar>
-
+        <ChampAppBar
+        handleAway={handleAway}
+        btn={btn}
+        handleClose={handleClose}
+        showAboutModel={showAboutModel}
+        showmodal={showmodal}
+        handle_time={handle_time}
+        time={time}
+        />
         </AppBar>
+        
+
         {/* Champions Grid List */}
           
         <ChampList data={name} handlebtn={handlebtn}></ChampList>
@@ -132,7 +102,10 @@ function App() {
         {/* Champion Modal */}
         <ReactModal
           children={
-            <ChampModal data={[name[i]]} showmymodal={handleModalClose} ></ChampModal>
+            <ChampModal
+            data={[name[i]]} 
+            showmymodal={handleModalClose} 
+            />
           }
           center={true}
           animationDuration={0}

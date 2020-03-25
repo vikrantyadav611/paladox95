@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Tabs, Tab, TabBody, Window, WindowHeader, WindowContent, Button, List, ListItem } from 'react95'
 import { Container, Row, Col } from 'react-bootstrap'
 import ReactImg from 'react-image'
-import '../Component/ChampModal.css'
+import '../../Component/CSS/ChampModal.css'
 import ClickAwayListener from 'react-click-away-listener'
 
 export default function MyTabs(props) {

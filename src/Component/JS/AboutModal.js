@@ -1,6 +1,6 @@
 import React from 'react'
 import { Window, WindowHeader, WindowContent, Button } from 'react95'
-import '../Component/AboutModal.css'
+import '../../Component/CSS/AboutModal.css'
 
 export default function MyTabs(props) {
 
