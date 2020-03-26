@@ -1,5 +1,5 @@
 import React,{Fragment} from 'react';
-import { Button, ListItem, Divider, List, Toolbar, themes, AppBar } from 'react95'
+import { Button, ListItem, Divider, List, Toolbar } from 'react95'
 import ClickAwayListener from 'react-click-away-listener'
 
 const Appbar = (props) => {
